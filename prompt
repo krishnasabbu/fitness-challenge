@@ -1,0 +1,195 @@
+Goal:
+Visualize 2 pipelines (Champion and Challenger) processing the same requests through 8 nodes and compare pass vs fail counts at every node.
+
+Tech stack:
+- React 19
+- TypeScript
+- TailwindCSS
+- shadcn/ui
+- Framer Motion
+- Lucide React
+
+Theme:
+- Background: #020617
+- Cards: #0F172A
+- Borders: #1E293B
+- Text: #E2E8F0
+- Muted: #94A3B8
+- Champion color: #22C55E
+- Challenger color: #3B82F6
+- Fail color: #EF4444
+
+Layout:
+- Full-screen responsive dashboard
+- Top header
+- Center comparison pipeline
+- Right summary panel
+- Glassmorphism cards
+- Rounded 20px
+- Subtle shadows and gradients
+
+Header:
+- Title: Champion vs Challenger – Funnel Pipeline
+- Subtitle: 10 Requests each
+- Right side: View Mode dropdown (Counts / Percentage)
+
+Main content:
+Use a 4-column layout:
+
+LEFT COLUMN (Champion)
+- Label card: CHAMPION / 10 Total
+- 8 horizontal progress bars stacked vertically
+- Each bar shows pass count in green and fail count in red
+- Animate widths on load
+
+CENTER COLUMN (Nodes)
+Create 8 connected node cards vertically:
+
+1. Device Trust
+2. Velocity Check
+3. IP / Location Risk
+4. User Behavior
+5. Device Fingerprint
+6. Transaction Pattern
+7. Risk Score Check
+8. Final Decision
+
+Each node card:
+- 56px icon circle
+- Node number
+- Node title
+- Node type (Rule Node / ML Node / Decision Node)
+- Border glow on hover
+- Connector lines between nodes
+
+RIGHT COLUMN (Challenger)
+- Label card: CHALLENGER / 10 Total
+- 8 horizontal progress bars stacked vertically
+- Pass in blue, fail in red
+- Animate widths on load
+
+FAR RIGHT COLUMN (Summary)
+Create a sticky summary card showing:
+
+Total Requests
+- Champion: 10
+- Challenger: 10
+
+Approved
+- Champion: 6 (60%)
+- Challenger: 1 (10%)
+
+Dropped
+- Champion: 1 (10%)
+- Challenger: 0 (0%)
+
+Pass Rate
+- Champion: 90%
+- Challenger: 70%
+
+Drop Rate
+- Champion: 10%
+- Challenger: 0%
+
+Use green for better values and red for worse values.
+
+Data:
+const nodes = [
+  {
+    id: 1,
+    name: 'Device Trust',
+    champion: { pass: 10, fail: 0 },
+    challenger: { pass: 10, fail: 0 },
+    type: 'Rule Node'
+  },
+  {
+    id: 2,
+    name: 'Velocity Check',
+    champion: { pass: 9, fail: 1 },
+    challenger: { pass: 6, fail: 4 },
+    type: 'Rule Node'
+  },
+  {
+    id: 3,
+    name: 'IP / Location Risk',
+    champion: { pass: 9, fail: 0 },
+    challenger: { pass: 5, fail: 1 },
+    type: 'Rule Node'
+  },
+  {
+    id: 4,
+    name: 'User Behavior',
+    champion: { pass: 8, fail: 1 },
+    challenger: { pass: 3, fail: 2 },
+    type: 'ML Node'
+  },
+  {
+    id: 5,
+    name: 'Device Fingerprint',
+    champion: { pass: 8, fail: 0 },
+    challenger: { pass: 3, fail: 0 },
+    type: 'Rule Node'
+  },
+  {
+    id: 6,
+    name: 'Transaction Pattern',
+    champion: { pass: 7, fail: 1 },
+    challenger: { pass: 2, fail: 1 },
+    type: 'ML Node'
+  },
+  {
+    id: 7,
+    name: 'Risk Score Check',
+    champion: { pass: 7, fail: 0 },
+    challenger: { pass: 1, fail: 1 },
+    type: 'Rule Node'
+  },
+  {
+    id: 8,
+    name: 'Final Decision',
+    champion: { pass: 6, fail: 1 },
+    challenger: { pass: 1, fail: 0 },
+    type: 'Decision Node'
+  }
+];
+
+Interactions:
+- Hover a node → highlight both corresponding bars
+- Click a node → open a right drawer
+- Drawer shows:
+  - Champion pass/fail
+  - Challenger pass/fail
+  - Delta
+  - Pass rate difference
+  - Mock rule explanation
+  - Mock feature values
+
+Animations:
+- Framer Motion staggered reveal
+- Progress bars animate from 0
+- Node cards fade + slide up
+- Summary numbers count up
+
+Responsiveness:
+- Desktop: 4 columns
+- Tablet: 2 columns
+- Mobile: stacked cards with horizontal scroll for bars
+
+Additional polish:
+- Add a small legend card bottom-left
+- Add tiny arrow connectors from bars to nodes
+- Add subtle blue radial background glow
+- Use tabular numbers
+- Use modern spacing (24px gaps)
+- No charts library needed; use pure div-based bars
+
+Code quality:
+- Create reusable components:
+  - PipelineBar
+  - NodeCard
+  - SummaryCard
+  - MetricRow
+  - LegendCard
+- Keep data-driven rendering
+- Use strict TypeScript types
+- Make it production-quality and visually identical to a premium fintech analytics dashboard.
